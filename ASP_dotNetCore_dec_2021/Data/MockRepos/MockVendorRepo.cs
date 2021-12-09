@@ -24,7 +24,7 @@ namespace ASP_dotNetCore_dec_2021.Data.MockRepos
         };
         public void CreateVendor(Vendor input)
         {
-            throw new NotImplementedException();
+            _vendors.Add(input);
         }
 
         public void DeleteVendor(int id)

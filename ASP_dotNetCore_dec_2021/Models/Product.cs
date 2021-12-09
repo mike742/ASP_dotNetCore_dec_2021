@@ -14,6 +14,6 @@ namespace ASP_dotNetCore_dec_2021.Models
         public int P_Min { get; set; }
         public double P_Price { get; set; }
         public double P_Discount { get; set; }
-        public int V_code { get; set; }
+        public int? V_code { get; set; }
     }
 }
