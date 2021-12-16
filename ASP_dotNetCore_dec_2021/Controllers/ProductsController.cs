@@ -1,4 +1,6 @@
-﻿using ASP_dotNetCore_dec_2021.Data.Interfaces;
+﻿using ASP_dotNetCore_dec_2021.Data;
+using ASP_dotNetCore_dec_2021.Data.Interfaces;
+using ASP_dotNetCore_dec_2021.ModelsDto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -13,6 +15,7 @@ namespace ASP_dotNetCore_dec_2021.Controllers
     {
         private readonly IProductRepo _repository;
         private readonly IVendorRepo _vendorRepo;
+        private readonly Mapper _mapper = new Mapper();
 
         public ProductsController(IProductRepo repo, IVendorRepo vendorRepo)
         {
@@ -39,7 +42,10 @@ namespace ASP_dotNetCore_dec_2021.Controllers
         // GET: ProductsController
         public ActionResult Index()
         {
-            return View(_repository.GetAllProducts());
+            //ProductDto 
+            var productDtos = _repository.GetAllProducts()
+                .Select(p => _mapper.Map(p));
+            return View(productDtos);
         }
 
         // GET: ProductsController/Details/5
@@ -62,10 +68,12 @@ namespace ASP_dotNetCore_dec_2021.Controllers
         // POST: ProductsController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(ProductDto input)
         {
             try
             {
+                var productToDb = _mapper.Map(input);
+                _repository.CreateProduct(productToDb);
                 return RedirectToAction(nameof(Index));
             }
             catch

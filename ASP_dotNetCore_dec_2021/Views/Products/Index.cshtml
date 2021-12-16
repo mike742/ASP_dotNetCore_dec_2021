@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Product>
+﻿@model IEnumerable<ASP_dotNetCore_dec_2021.ModelsDto.ProductDto>
 
 @{
     ViewData["Title"] = "Index";
@@ -21,12 +21,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.P_InDate)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.P_QOH)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.P_Min)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.P_Price)
             </th>
@@ -51,12 +51,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.P_InDate)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.P_QOH)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.P_Min)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.P_Price)
             </td>

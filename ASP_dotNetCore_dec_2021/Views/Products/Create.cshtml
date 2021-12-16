@@ -1,4 +1,4 @@
-﻿@model ASP_dotNetCore_dec_2021.Models.Product
+﻿@model ASP_dotNetCore_dec_2021.ModelsDto.ProductDto
 
 @{
     ViewData["Title"] = "Create";
@@ -26,16 +26,6 @@
                 <label asp-for="P_InDate" class="control-label"></label>
                 <input asp-for="P_InDate" class="form-control" />
                 <span asp-validation-for="P_InDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="P_QOH" class="control-label"></label>
-                <input asp-for="P_QOH" class="form-control" />
-                <span asp-validation-for="P_QOH" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="P_Min" class="control-label"></label>
-                <input asp-for="P_Min" class="form-control" />
-                <span asp-validation-for="P_Min" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="P_Price" class="control-label"></label>
