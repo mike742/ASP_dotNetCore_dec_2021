@@ -40,10 +40,11 @@
             <div class="form-group">
                 <label class="control-label"> Vendors</label>
                 @*<input asp-for="V_order" class="form-control" />
-                <span asp-validation-for="V_order" class="text-danger"></span>*@
+        <span asp-validation-for="V_order" class="text-danger"></span>*@
                 <br />
-                <select asp-items="ViewBag.Vendors" asp-for="V_code"
-                        name="V_name"></select>
+
+                <!-- fix v_code null returning -->
+                <select asp-items="ViewBag.Vendors" asp-for="V_code"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
