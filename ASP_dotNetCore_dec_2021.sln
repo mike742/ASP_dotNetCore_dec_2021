@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASP_dotNetCore_dec_2021", "ASP_dotNetCore_dec_2021\ASP_dotNetCore_dec_2021.csproj", "{F13CABDD-0320-44C5-8EEB-F95B606B0020}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASP_dotNetCore_dec_2021", "ASP_dotNetCore_dec_2021\ASP_dotNetCore_dec_2021.csproj", "{F13CABDD-0320-44C5-8EEB-F95B606B0020}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API_dotNete_Core_Jan_2022", "API_dotNete_Core_Jan_2022\API_dotNete_Core_Jan_2022.csproj", "{67BD1A75-195B-41F9-9EC0-6A8F3ABE8EA6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API_demo_Jan_2022_ver2", "API_demo_Jan_2022_ver2\API_demo_Jan_2022_ver2.csproj", "{477A6520-04A9-467D-965B-60E88D66C6C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{F13CABDD-0320-44C5-8EEB-F95B606B0020}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F13CABDD-0320-44C5-8EEB-F95B606B0020}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F13CABDD-0320-44C5-8EEB-F95B606B0020}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67BD1A75-195B-41F9-9EC0-6A8F3ABE8EA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67BD1A75-195B-41F9-9EC0-6A8F3ABE8EA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67BD1A75-195B-41F9-9EC0-6A8F3ABE8EA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67BD1A75-195B-41F9-9EC0-6A8F3ABE8EA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{477A6520-04A9-467D-965B-60E88D66C6C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{477A6520-04A9-467D-965B-60E88D66C6C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{477A6520-04A9-467D-965B-60E88D66C6C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{477A6520-04A9-467D-965B-60E88D66C6C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
