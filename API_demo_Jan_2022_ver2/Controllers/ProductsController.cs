@@ -1,4 +1,6 @@
 ﻿using API_demo_Jan_2022_ver2.Data;
+using API_demo_Jan_2022_ver2.Models;
+using API_demo_Jan_2022_ver2.ModelsDto;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -19,8 +21,6 @@ namespace API_demo_Jan_2022_ver2.Controllers
         {
             _context = context;
         }
-
-
         // GET: api/<ProductsController>
         [HttpGet]
         public ActionResult Get()
@@ -44,20 +44,47 @@ namespace API_demo_Jan_2022_ver2.Controllers
 
         // POST api/<ProductsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult Post(ProductCreateDto value)
         {
+            Product productToAdd = new Product { 
+                Name = value.Name,
+                Price = value.Price
+            };
+
+            _context.Products.Add(productToAdd);
+            _context.SaveChanges();
+
+            return Ok();
         }
 
         // PUT api/<ProductsController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("{id}")] // Update
+        public ActionResult Put(int id, ProductCreateDto value)
         {
+            var productFromDb = _context.Products.FirstOrDefault(p => p.Id == id);
+
+            if (productFromDb == null) return NotFound();
+
+            productFromDb.Name = value.Name;
+            productFromDb.Price = value.Price;
+
+            _context.SaveChanges();
+
+            return Ok(); // 200
         }
 
         // DELETE api/<ProductsController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
+            var productFromDb = _context.Products.FirstOrDefault(p => p.Id == id);
+
+            if (productFromDb == null) return NotFound();
+
+            _context.Products.Remove(productFromDb);
+            _context.SaveChanges();
+
+            return Ok();
         }
     }
 }

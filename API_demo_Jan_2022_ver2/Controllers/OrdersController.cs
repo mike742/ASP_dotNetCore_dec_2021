@@ -1,4 +1,5 @@
 ﻿using API_demo_Jan_2022_ver2.Data;
+using API_demo_Jan_2022_ver2.Models;
 using API_demo_Jan_2022_ver2.ModelsDto;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -58,9 +59,37 @@ namespace API_demo_Jan_2022_ver2.Controllers
 
         // GET api/<OrdersController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public ActionResult Get(int id)
         {
-            return "value";
+            OrderDto order = _context.Orders
+                .Where(o => o.Id == id)
+                .Select(o => new OrderDto { Id = o.Id, Name = o.Name, Date = o.Date })
+                .FirstOrDefault();
+
+            if (order == null) return NotFound();
+
+            var orderProducts = _context.OrderProducts.ToList();
+
+            var productsToAdd = new List<ProductDto>();
+            foreach (var op in orderProducts)
+            {
+                if (op.OrderId == order.Id)
+                {
+                    ProductDto p = _context.Products
+                        .Where(p => p.Id == op.ProductId)
+                        .Select(p => new ProductDto
+                        {
+                            Id = p.Id,
+                            Name = p.Name,
+                            Price = p.Price
+                        })
+                        .First();
+                    productsToAdd.Add(p);
+                }
+            }
+            order.Products = productsToAdd;
+
+            return Ok(order);
         }
 
         // POST api/<OrdersController>
