@@ -93,21 +93,100 @@ namespace API_demo_Jan_2022_ver2.Controllers
         }
 
         // POST api/<OrdersController>
+        /*
+         {
+          "name": "New Order",
+          "date": "2022-01-08",
+          "productIds": [
+            1, 2
+          ]
+        }
+         */
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult Post(OrderCreateDto value)
         {
+            Order newOrder = new Order { 
+                Name = value.Name,
+                Date = value.Date
+            };
+
+            _context.Orders.Add(newOrder);
+            _context.SaveChanges();
+
+            foreach (var item in value.ProductIds)
+            {
+                var ohp = new OrderProducts
+                {
+                    OrderId = newOrder.Id,
+                    ProductId = item
+                };
+                _context.OrderProducts.Add(ohp);
+            }
+
+            _context.SaveChanges();
+
+
+            return Ok();
+
         }
 
         // PUT api/<OrdersController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult Put(int id, OrderCreateDto value)
         {
+            // Searching an order with given id
+            var orderFromDb = _context
+                .Orders
+                .FirstOrDefault(p => p.Id == id);
+
+            if (orderFromDb == null) return NotFound();
+
+            // Update existing Order properties
+            orderFromDb.Name = value.Name;
+            orderFromDb.Date = value.Date;
+
+
+            // Updating products
+            var rangeProducts = _context.OrderProducts
+                    .Where(op => op.OrderId == id).ToList();
+
+            _context.OrderProducts.RemoveRange(rangeProducts);
+
+            foreach (var item in value.ProductIds)
+            {
+                var ohp = new OrderProducts
+                {
+                    OrderId = id,
+                    ProductId = item
+                };
+                _context.OrderProducts.Add(ohp);
+            }
+
+            _context.SaveChanges();
+            return Ok();
         }
 
         // DELETE api/<OrdersController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
+            // another way to find an object
+            Order orderToDelete = _context.Orders.Find(id);
+
+            if (orderToDelete == null)
+            {
+                return NotFound();
+            }
+
+            var rangeProducts = _context.OrderProducts
+                    .Where(op => op.OrderId == id).ToList();
+
+            _context.OrderProducts.RemoveRange(rangeProducts);
+            _context.Orders.Remove(orderToDelete);
+            _context.SaveChanges();
+
+
+            return Ok();
         }
     }
 }
